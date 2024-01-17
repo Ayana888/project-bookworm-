@@ -25,7 +25,7 @@ function NavBar({ user }) {
               Home
             </a>
             <a className="nav-link" href="/heroes">
-              Heroes
+              Add Book
             </a>
             {user ? (
               <>

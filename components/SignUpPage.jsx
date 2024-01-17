@@ -20,10 +20,10 @@ function SignUpPage() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="img" className="form-label">
-              Image
+            <label htmlFor="email" className="form-label">
+              Email
             </label>
-            <input name="img" type="text" className="form-control" id="img" />
+            <input name="email" type="text" className="form-control" id="img" />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
