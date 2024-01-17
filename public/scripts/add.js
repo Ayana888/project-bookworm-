@@ -25,8 +25,8 @@ if (addBook) {
     if (data.message === "success") {
       document
         .querySelector(".book-container")
-        .insertAdjacentHTML("beforeend", data.html);
       e.target.reset(); // очитска форма после добавления
+      window.location.assign('/')
     } else {
       alert(data.message);
     }

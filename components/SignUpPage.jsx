@@ -1,6 +1,5 @@
 const React = require("react");
 const Layout = require("./Layout");
-
 function SignUpPage() {
   return (
     <Layout>
@@ -46,10 +45,10 @@ function SignUpPage() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
+            <label htmlFor="img" className="form-label avatar">
+              Image
             </label>
-            <input name="email" type="text" className="form-control" id="img" />
+            <input name="img" type="text" className="form-control" id="img" />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
@@ -84,7 +83,4 @@ function SignUpPage() {
     </Layout>
   );
 }
-
 module.exports = SignUpPage;
-
-
