@@ -1,0 +1,1 @@
+const addHero = document.getElementById("");
