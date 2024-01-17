@@ -1,0 +1,49 @@
+const React = require("react");
+const Layout = require("./Layout");
+
+function SignUpPage() {
+  return (
+    <Layout>
+      <div className="container">
+        <form id="sign-up">
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              name="name"
+              type="text"
+              autoComplete="username"
+              className="form-control"
+              id="name"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="img" className="form-label">
+              Image
+            </label>
+            <input name="img" type="text" className="form-control" id="img" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              className="form-control"
+              id="password"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Зарегистрироваться
+          </button>
+        </form>
+      </div>
+    </Layout>
+  );
+}
+
+module.exports = SignUpPage;
