@@ -1,4 +1,4 @@
-const addBook = document.getElementById("add-book");
+const addBook = document.querySelector(".add-book");
 console.log(addBook, 222);
 // console.log(document.cookie);
 
@@ -6,7 +6,7 @@ if (addBook) {
   addBook.addEventListener("submit", async (e) => {
     e.preventDefault();
     const { name, author, img } = e.target;
-    // console.log(name.value, description.value, film.value, img.value); //все 4 инпута, значение достаем через .value
+    console.log( name.value, author.value, img.value); //все 4 инпута, значение достаем через .value
     const res = await fetch("/api/books", {
       method: "post",
       headers: {

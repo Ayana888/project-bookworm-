@@ -5,7 +5,7 @@ function AddBookForm() {
   return (
     <Layout>
       <div className="container">
-        <form id="add-book" style={{ color: "blue" }}>
+        <form className="add-book" style={{ color: "blue" }}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Name
@@ -40,17 +40,6 @@ function AddBookForm() {
               id="exampleInputPassword1"
             />
           </div>
-          {/* <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Comment
-            </label>
-            <input
-              name="comment"
-              type="text"
-              className="form-control"
-              id="exampleInputPassword1"
-            />
-          </div> */}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

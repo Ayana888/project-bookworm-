@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Book } = require("../../db/models");
-// const BookItem = require("../../components/BookItem");
+const BookItem = require("../../components/BookItem");
+
 
 router.post("/", async (req, res) => {
   try {
@@ -11,7 +12,8 @@ router.post("/", async (req, res) => {
       name,
       author,
       img,
-      user_id: res.locals.user.id, //user_id: 1 было
+      rating: 1,
+      user_id: 1,
     });
     const currentBook = await Book.findOne({
       where: { id: book.id },
@@ -21,7 +23,6 @@ router.post("/", async (req, res) => {
     const html = res.renderComponent(
       BookItem,
       { book: currentBook },
-      { doctype: false }
     );
     // и отправили, далее идем в add.js
     res.json({
@@ -33,3 +34,5 @@ router.post("/", async (req, res) => {
     res.json({ message });
   }
 });
+
+module.exports = router
