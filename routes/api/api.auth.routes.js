@@ -1,8 +1,14 @@
 const router = require("express").Router();
-// const { User } = require("../../db/models");
+const { User } = require("../../db/models");
 const bcrypt = require("bcrypt");
 const generateTokens = require("../../utils/authUtils");
 const configJWT = require("../../middleware/configJWT");
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 
 router.post("/sign-in", async (req, res) => {
   let user;
@@ -46,18 +52,32 @@ router.post("/sign-in", async (req, res) => {
 router.post("/sign-up", async (req, res) => {
   let user;
   try {
-    const { name, password, img } = req.body;
+    const { name, email, mobile, img, password, rpassword } = req.body;
+    //console.log(password, rpassword);
     // console.log(name, password, img, 33);
+    
+    if (!isValidEmail(email)) {
+      res.json({ type: "blabla", message: "Некорректный формат email" });
+      return;
+    }
+
     user = await User.findOne({ where: { name } }); // находим user и пишем проверку
     if (user) {
       res.json({ message: "Такой пользователь уже есть!" });
       return;
     }
+
+    if (rpassword !== password) {
+      res.json({ message: "Пароли не совпадают!" });
+      return;rs
+    } //нельзя отправить два jsona, надо писать на странице
+   
+  
     const hash = await bcrypt.hash(password, 10);
     //в другом случае создает user
-    user = await User.create({ name, password: hash, img });
-    // console.log(user.id, 77);
-    //-------------------------------------------
+    user = await User.create({ name, email, password: hash, img, mobile, });
+    console.log(user.id, 77);
+   
     // генерируем два токена
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, name: user.name, img: user.img },
