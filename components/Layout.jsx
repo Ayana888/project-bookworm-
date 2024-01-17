@@ -10,7 +10,6 @@ module.exports = function Layout({ title, children, user }) {
         <link
           href="/styles/bootstrap.css"
           rel="stylesheet"
-          crossOrigin="anonymous"
         ></link>
         <link href="/styles/style.css" rel="stylesheet"></link>
         <script defer src="/scripts/add.js" />

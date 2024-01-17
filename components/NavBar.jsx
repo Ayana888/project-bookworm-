@@ -29,7 +29,7 @@ function NavBar({ user }) {
             </a>
             {user ? (
               <>
-                <a className="nav-link" href="/favorites">
+                <a className="nav-link" href="/favourites">
                   Favorites
                 </a>
                 <div className="nav__profile">

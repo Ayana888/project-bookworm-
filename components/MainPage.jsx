@@ -13,7 +13,7 @@ function MainPage({ title, user, book }) {
         }}
       >
         <h1></h1>
-        <div className="container book-container" style={{display:'flex', justifyContent:'center'}}>
+        <div className="container book-container">
         {book.map((books) => (
           <BookItem key={books.id} book={books} />
           
