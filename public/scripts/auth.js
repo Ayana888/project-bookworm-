@@ -5,7 +5,7 @@ const signUpForm = document.querySelector("#sign-up");
 if (signInForm) {
   signInForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const { name, password } = e.target;
+    const { name, password  } = e.target;
     // console.log(name.value, password.value, 99);
     const res = await fetch("/api/auth/sign-in", {
       method: "post",
@@ -32,7 +32,8 @@ if (signInForm) {
 if (signUpForm) {
   signUpForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const { name, password, img } = e.target;
+    const { Name, email, mobile, img, password, rpassword } = e.target;
+    //console.log(Name.value,email.value,mobile.value, password.value, img.value);
     // console.log(name.value, password.value, img.value, 888);
     const res = await fetch("/api/auth/sign-up", {
       method: "post",
@@ -40,13 +41,15 @@ if (signUpForm) {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: name.value,
+        name: Name.value,
+        email: email.value,
+        mobile: mobile.value,
         password: password.value,
+        rpassword: rpassword,
         img: img.value,
       }),
     });
     const data = await res.json();
-    // console.log(data, 1111); //   ПРИШЛО СООБЩЕНИЕ 'SUCCESS'
 
     if (data.message === "success") {
       window.location.assign("/");

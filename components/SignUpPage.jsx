@@ -11,7 +11,33 @@ function SignUpPage() {
               Name
             </label>
             <input
-              name="name"
+              name="Name"
+              type="text"
+              autoComplete="username"
+              className="form-control"
+              id="name"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              name="email"
+              type="text"
+              autoComplete="username"
+              className="form-control"
+              id="name"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="mobile" className="form-label">
+              Mobile
+            </label>
+            <input
+              name="mobile"
               type="text"
               autoComplete="username"
               className="form-control"
@@ -35,6 +61,19 @@ function SignUpPage() {
               autoComplete="current-password"
               className="form-control"
               id="password"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="rpassword" className="form-label">
+              Repeat Password
+            </label>
+            <input
+              name="rpassword"
+              type="text"
+              autoComplete="username"
+              className="form-control"
+              id="name"
+              aria-describedby="emailHelp"
             />
           </div>
           <button type="submit" className="btn btn-primary">
