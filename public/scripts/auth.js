@@ -45,7 +45,7 @@ if (signUpForm) {
         email: email.value,
         mobile: mobile.value,
         password: password.value,
-        rpassword: rpassword,
+        rpassword: rpassword.value,
         img: img.value,
       }),
     });

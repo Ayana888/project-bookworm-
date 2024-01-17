@@ -20,7 +20,7 @@ function SignUpPage() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
+            <label htmlFor="email" className="form-label mail">
               Email
             </label>
             <input
@@ -69,7 +69,7 @@ function SignUpPage() {
             </label>
             <input
               name="rpassword"
-              type="text"
+              type="password"
               autoComplete="username"
               className="form-control"
               id="name"

@@ -4,6 +4,12 @@ const bcrypt = require("bcrypt");
 const generateTokens = require("../../utils/authUtils");
 const configJWT = require("../../middleware/configJWT");
 
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+
 router.post("/sign-in", async (req, res) => {
   let user;
   try {
@@ -47,17 +53,26 @@ router.post("/sign-up", async (req, res) => {
   let user;
   try {
     const { name, email, mobile, img, password, rpassword } = req.body;
-    //console.log(req.body);
+    //console.log(password, rpassword);
     // console.log(name, password, img, 33);
-    // if (rpassword !=== password) {
-    //   res.json({ message: "Пароли не совпадают!" });
-    // } //нельзя отправить два jsona, надо писать на странице
-   
+    
+    if (!isValidEmail(email)) {
+      res.json({ type: "blabla", message: "Некорректный формат email" });
+      return;
+    }
+
     user = await User.findOne({ where: { name } }); // находим user и пишем проверку
     if (user) {
       res.json({ message: "Такой пользователь уже есть!" });
       return;
     }
+
+    if (rpassword !== password) {
+      res.json({ message: "Пароли не совпадают!" });
+      return;rs
+    } //нельзя отправить два jsona, надо писать на странице
+   
+  
     const hash = await bcrypt.hash(password, 10);
     //в другом случае создает user
     user = await User.create({ name, email, password: hash, img, mobile, });
