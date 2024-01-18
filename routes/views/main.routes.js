@@ -6,8 +6,8 @@ const AddBookForm = require("../../components/AddBookForm");
 const BookItem = require("../../components/BookItem");
 
 router.get("/", async (req, res) => {
-  const book = await Book.findAll()
-  const html = res.renderComponent(MainPage, { title: "Main page",book });
+  const books = await Book.findAll()
+  const html = res.renderComponent(MainPage, { title: "Main page",books });
   res.send(html);
 });
 router.get("/books/:bookId", async (req, res) => {

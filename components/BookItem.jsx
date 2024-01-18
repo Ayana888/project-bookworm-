@@ -1,10 +1,8 @@
 const React = require('react');
-const Rate = require('./Rate');
+//const Rate = require('./Rate');
 
 
 function BookItem({ book, user }) {
-  //console.log(book);
-  const [like] = book.Likes.filter((el)=>el.user_id === user.id);
 
   return (
     <div style={{ display: "flex", paddingRight: "90px" }}>
@@ -16,13 +14,13 @@ function BookItem({ book, user }) {
         
  <a href={`/books/${book.id}`} className="btn btn-primary">Подробнее</a>
 
-        {like ? (
+        {book.Likes ? (
           <button data-id={book.id} className="btn btn-success dfavorite" type="button">
-            Удалить из избранного
+            Удалить из избранного 💔
           </button>
         ) : (
           <button data-id={book.id} className="btn btn-success favorite" type="button">
-            В избранное
+            В избранное ❤️
           </button>
         )}
          
@@ -35,6 +33,6 @@ function BookItem({ book, user }) {
       </div>
     </div>
   );
-
+        }
 
 module.exports = BookItem;
