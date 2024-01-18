@@ -6,8 +6,8 @@ async function getUser(req, res, next) {
       attributes: ["name", "img", "id"],
     });
     res.locals.user = user;
-    next();
-  }
+     }
+  next();
 }
 
 module.exports = getUser;
