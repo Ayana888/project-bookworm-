@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.container-fluid {
+  background-color: aliceblue;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body {
+  background-image: url("https://klike.net/uploads/posts/2022-09/1663302276_g-1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .nav__avatar {
   width: 30px;
   height: 30px;
@@ -16,6 +28,11 @@
   flex-direction: row;
   max-width: 500px;
 }
+
+.book-container {
+  max-width: 500px;
+}
+
 .nav__profile {
   display: flex;
   justify-content: center;

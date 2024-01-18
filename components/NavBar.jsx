@@ -3,10 +3,7 @@ const React = require("react");
 function NavBar({ user }) {
   // console.log(user, 11);
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light bg-light"
-      style={{ color: "blue" }}
-    >
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
