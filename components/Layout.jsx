@@ -8,9 +8,11 @@ module.exports = function Layout({ title, children, user }) {
         <title>{title}</title>
         {/* <link rel="stylesheet" href="style.css" /> */}
         <link
-          href="/styles/bootstrap.css"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&amp;display=swap"
           rel="stylesheet"
         ></link>
+        <link href="/styles/bootstrap.css" rel="stylesheet"></link>
+
         <link href="/styles/style.css" rel="stylesheet"></link>
         <script defer src="/scripts/add.js" />
         <script defer src="/scripts/delete.js" />

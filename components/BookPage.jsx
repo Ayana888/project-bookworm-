@@ -9,7 +9,6 @@ function BookPage({ title, book, user }) {
         <img src={book.img} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{book.name}</h5>
-          {/* <p className="card-text">{hero.description}</p> */}
         </div>
       </div>
     </Layout>
