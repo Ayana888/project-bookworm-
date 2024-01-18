@@ -4,7 +4,7 @@ const Layout = require("./Layout");
 function SignInPage() {
   return (
     <Layout>
-      <div className="container">
+      <div className="containerIn">
         <form id="sign-in">
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
