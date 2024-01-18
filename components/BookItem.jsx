@@ -1,4 +1,5 @@
-const React = require("react");
+const React = require('react');
+const Rate = require('./Rate');
 
 
 function BookItem ({books}){
@@ -15,8 +16,6 @@ function BookItem ({books}){
 </div>
 </div>
     )
-
-    
 
 }
 
