@@ -28,7 +28,6 @@ if (addBook) {
       e.target.reset(); // очитска форма после добавления
       window.location.assign('/')
     } else {
-      alert(data.message);
     }
   });
 }
