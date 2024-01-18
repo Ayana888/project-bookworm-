@@ -9,7 +9,6 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-
 router.post("/sign-in", async (req, res) => {
   let user;
   try {
@@ -55,7 +54,7 @@ router.post("/sign-up", async (req, res) => {
     const { name, email, mobile, img, password, rpassword } = req.body;
     //console.log(password, rpassword);
     // console.log(name, password, img, 33);
-    
+
     if (!isValidEmail(email)) {
       res.json({ type: "blabla", message: "Некорректный формат email" });
       return;
@@ -69,15 +68,15 @@ router.post("/sign-up", async (req, res) => {
 
     if (rpassword !== password) {
       res.json({ message: "Пароли не совпадают!" });
-      return;rs
+      return;
+      rs;
     } //нельзя отправить два jsona, надо писать на странице
-   
-  
+
     const hash = await bcrypt.hash(password, 10);
     //в другом случае создает user
-    user = await User.create({ name, email, password: hash, img, mobile, });
+    user = await User.create({ name, email, password: hash, img, mobile });
     console.log(user.id, 77);
-   
+
     // генерируем два токена
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, name: user.name, img: user.img },

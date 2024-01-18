@@ -15,7 +15,7 @@ function MainPage({ title, user, book }) {
         <h1></h1>
         <div className="container book-container">
         {book.map((books) => (
-          <BookItem key={books.id} book={books} />
+          <BookItem key={books.id} books={books} />
           
         ))}
         </div>
