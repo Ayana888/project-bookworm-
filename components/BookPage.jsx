@@ -1,10 +1,10 @@
 const React = require("react");
 const Layout = require("./Layout");
 
-function HeroPage({ title, book, user }) {
+function BookPage({ title, book, user }) {
   return (
     <Layout title={title} user={user}>
-      <h1>Hero page</h1>
+      <h1>Book page</h1>
       <div className="card" style={{ width: "18rem", margin: "20px" }}>
         <img src={book.img} className="card-img-top" alt="..." />
         <div className="card-body">
@@ -16,4 +16,4 @@ function HeroPage({ title, book, user }) {
   );
 }
 
-module.exports = HeroPage;
+module.exports = BookPage;
