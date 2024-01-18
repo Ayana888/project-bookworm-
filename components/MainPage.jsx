@@ -5,19 +5,15 @@ const BookItem = require("./BookItem");
 function MainPage({ title, user, book }) {
   return (
     <Layout title={title} user={user}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
+      <div>
         <h1></h1>
         <div className="container book-container">
+
         {book.map((books) => (
           <BookItem key={books.id} books={books} />
           
         ))}
+
         </div>
       </div>
     </Layout>
