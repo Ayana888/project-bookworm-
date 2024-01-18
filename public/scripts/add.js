@@ -1,5 +1,4 @@
 const addBook = document.querySelector(".add-book");
-console.log(addBook, 222);
 // console.log(document.cookie);
 
 if (addBook) {

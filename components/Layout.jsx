@@ -19,6 +19,7 @@ module.exports = function Layout({ title, children, user }) {
         <script defer src="/scripts/update.js" />
         <script defer src="/scripts/like.js" />
         <script defer src="/scripts/auth.js" />
+        <script defer src="/scripts/addComment.js" />
       </head>
       <body>
         <NavBar user={user} />
