@@ -21,11 +21,12 @@ function NavBar({ user }) {
             <a className="nav-link" href="/">
               Home
             </a>
-            <a className="nav-link" href="/books">
-              Add Book
-            </a>
+
             {user ? (
               <>
+                <a className="nav-link" href="/AddBook">
+                  Add Book
+                </a>
                 <a className="nav-link" href="/favourites">
                   Favorites
                 </a>

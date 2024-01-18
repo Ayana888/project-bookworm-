@@ -8,9 +8,12 @@ function MainPage({ title, user, book }) {
       <div>
         <h1></h1>
         <div className="container book-container">
-          {book.map((books) => (
-            <BookItem key={books.id} book={books} />
-          ))}
+
+        {book.map((books) => (
+          <BookItem key={books.id} books={books} />
+          
+        ))}
+
         </div>
       </div>
     </Layout>
