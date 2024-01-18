@@ -3,7 +3,7 @@ const Layout = require("./Layout");
 function SignUpPage() {
   return (
     <Layout>
-      <div className="container">
+      <div className="containerUp">
         <form id="sign-up">
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
@@ -31,7 +31,7 @@ function SignUpPage() {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="mobile" className="form-label">
               Mobile
             </label>
@@ -43,7 +43,7 @@ function SignUpPage() {
               id="name"
               aria-describedby="emailHelp"
             />
-          </div>
+          </div> */}
           <div className="mb-3">
             <label htmlFor="img" className="form-label avatar">
               Image

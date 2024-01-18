@@ -5,7 +5,6 @@ const BookComment = require("./BookComment");
 function BookPage({ title, book, user, coments }) {
   return (
     <Layout title={title} user={user}>
-      <h1>Book page</h1>
       <div
         className="carddd"
         data-id={book.id}
@@ -14,6 +13,8 @@ function BookPage({ title, book, user, coments }) {
         <img src={book.img} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{book.name}</h5>
+          <h5 className="card-title">{book.author}</h5>
+
           <form className="add-comment">
             <div className="mb-3">
               <input type="text" name="text" className="form-control" />
