@@ -2,8 +2,6 @@ const React = require("react");
 const Rate = require("./Rate");
 
 function BookItem({ book, user }) {
-  //console.log(book);
-
 
   return (
     <div className='boxmm' data-id={book.id} style={{ display: "flex", paddingRight: "90px" }}>
@@ -18,47 +16,50 @@ function BookItem({ book, user }) {
           <a href={`/books/${book.id}`} className="btn btn-primary">
             Подробнее
           </a>
+          {user && (
+            <div>
+              {book.Likes ? (
+                <button
+                  data-id={book.id}
+                  className="btn btn-success dfavorite"
+                  type="button"
+                >
+                  Удалить из избранного 💔
+                </button>
+              ) : (
+                <button
+                  data-id={book.id}
+                  className="btn btn-success favorite"
+                  type="button"
+                >
+                  В избранное ❤️
+                </button>
+              )}
 
-          {book.Likes ? (
-            <button
-              data-id={book.id}
-              className="btn btn-success dfavorite"
-              type="button"
-            >
-              Удалить из избранного 💔
-            </button>
-          ) : (
-            <button
-              data-id={book.id}
-              className="btn btn-success favorite"
-              type="button"
-            >
-              В избранное ❤️
-            </button>
+              {user.id === book.user_id && (
+                <>
+                  <button
+                    data-id={book.id}
+                    className="btn btn-danger delete"
+                    type="button"
+                  >
+                    Удалить
+                  </button>
+                  <a
+                    href={`/books/update-form/${book.id}`}
+                    className="btn btn-warning update"
+                    type="button"
+                  >
+                    Изменить
+                  </a>
+                </>
+              )}
+            </div>
           )}
-
-
-          <button
-            data-id={book.id}
-            className="btn btn-danger delete"
-            type="button"
-          >
-            Удалить
-          </button>
-          <a
-            href={`/books/update-form/${book.id}`}
-            className="btn btn-warning update"
-            type="button"
-          >
-            Изменить
-          </a>
         </div>
       </div>
     </div>
-  );
-  }
-
-  //  }
+  )
 }
 
 module.exports = BookItem;

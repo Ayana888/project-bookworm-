@@ -46,6 +46,7 @@ function NavBar({ user }) {
                 <a className="nav-link" href="/auth/sign-up">
                   Sign up
                 </a>
+                <a className="nav-link" style={{ color: 'black' }}>Hello, Guest!✋</a>
               </>
             )}
           </div>

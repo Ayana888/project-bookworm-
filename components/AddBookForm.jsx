@@ -1,9 +1,9 @@
 const React = require("react"); //
 const Layout = require("./Layout");
 
-function AddBookForm() {
+function AddBookForm( {user} ) {
   return (
-    <Layout>
+    <Layout user = {user}>
       <div className="container">
         <form className="add-book" style={{ color: "blue" }}>
           <div className="mb-3">
