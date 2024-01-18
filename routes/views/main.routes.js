@@ -1,17 +1,45 @@
 const router = require("express").Router();
 const BookPage = require("../../components/BookPage");
 const MainPage = require("../../components/MainPage");
+
 const { Book, Comment } = require("../../db/models");
+
 const AddBookForm = require("../../components/AddBookForm");
 const BookItem = require("../../components/BookItem");
+const FormUpdatePage = require("../../components/FormUpdatePage");
 
 router.get("/", async (req, res) => {
+
   const books = await Book.findAll();
   const html = res.renderComponent(MainPage, { title: "Main page", books });
   res.send(html);
 });
 
 router.get("/api/books/:bookId", async (req, res) => {
+
+
+  const books = await Book.findAll();
+  const html = res.renderComponent(MainPage, { title: "Main page", books });
+
+  res.send(html);
+});
+
+router.get("/books/update-form/:bookId", async (req, res) => {
+  try {
+    const { bookId } = req.params;
+    const book = await Book.findOne({ where: { id: bookId } });
+    const html = res.renderComponent(FormUpdatePage, {
+      title: "Update page",
+      book,
+    });
+    res.send(html);
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.get("/books/:bookId", async (req, res) => {
+
   try {
     const { bookId } = req.params;
     const book = await Book.findOne({ where: { id: bookId } });
@@ -58,11 +86,14 @@ router.delete("/:bookId", async (req, res) => {
       res.json({ message: "success" });
       return;
     }
-    res.json({ message });
+
+    res.json({ message: "Не твоя, вот ты и бесишься" });
+
   } catch ({ message }) {
     res.json({ message });
   }
 });
+
 
 
 router.post("/books/:bookId", async (req, res) => {
@@ -84,7 +115,6 @@ router.post("/books/:bookId", async (req, res) => {
     res.json(`POST: ${message}`);
   }
 });
-
 
 
 module.exports = router;

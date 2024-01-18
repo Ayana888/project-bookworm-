@@ -1,6 +1,26 @@
-const heroContainerLike = document.querySelector('.hero-container');
+const bookContainerLike = document.querySelector('.book-container');
+const favContainerLike = document.querySelector('.fav-container');
 
-heroContainerLike?.addEventListener('click', async (e) => {
+favContainerLike?.addEventListener('click', async (e) => { 
+  if (e.target.classList.contains('dfavorite')) {
+    const { id } = e.target.dataset;
+    const res = await fetch(`/api/favorites/${id}`, {
+      method: 'delete',
+    });
+    const data = await res.json();
+    if (data.message === 'success') {
+      e.target.innerText = 'В избранное';
+      e.target.classList.add('favorite');
+      e.target.classList.remove('dfavorite');
+      e.target.closest('.card').remove();
+    } else {
+      alert(data.message);
+    }
+    return;
+  }
+});
+
+bookContainerLike?.addEventListener('click', async (e) => {
   if (e.target.classList.contains('favorite')) {
     const { id } = e.target.dataset;
     const res = await fetch(`/api/favorites`, {
@@ -36,3 +56,23 @@ heroContainerLike?.addEventListener('click', async (e) => {
     return;
   }
 });
+
+
+
+// .addEventListener('click', async (e) => {
+//   if (e.target.classList.contains('delete')) {
+//     const answer = confirm('Вы точно этого хотите?');
+//     if (answer) {
+//       const { id } = e.target.dataset;
+//       const res = await fetch(`/api/heroes/${id}`, {
+//         method: 'delete',
+//       });
+//       const data = await res.json();
+//       if (data.message === 'success') {
+//         e.target.closest('.card').remove();
+//       } else {
+//         alert(data.message);
+//       }
+//     }
+//   }
+// });
