@@ -39,7 +39,7 @@ router.get("/books/:bookId", async (req, res) => {
   }
 });
 router.get("/AddBook", (req, res) => {
-  const html = res.renderComponent(AddBookForm, { title: "Add Book Page" });
+  const html = res.renderComponent(AddBookForm, { title: "Add Book Page", user: res.locals.user });
   res.send(html);
 });
 
@@ -69,12 +69,19 @@ router.post("/", async (req, res) => {
 router.delete("/:bookId", async (req, res) => {
   try {
     const { bookId } = req.params;
-    const result = await Book.destroy({ where: { id: bookId } });
+    const result = await Book.destroy({ where: {
+    id: bookId,
+    user_id: res.locals.user.id,
+  }});
+  // await Like.destroy({ where: {
+  //   book_id: bookId,
+  //   user_id: res.locals.user.id,
+  // }});
     if (result > 0) {
       res.json({ message: "success" });
       return;
     }
-    res.json({ message: "Не твоя, вот ты и бесишься" });
+    res.json({ message: "Вы не можете удалить книгу, которую добавили не Вы!" });
   } catch ({ message }) {
     res.json({ message });
   }

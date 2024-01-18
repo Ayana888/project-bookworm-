@@ -1,11 +1,13 @@
 const router = require('express').Router();
-//const BookItem = require('../../components/BookItem');
-//const HeroesListPage = require('../../components/HeroesListPage');
 const Favourites = require('../../components/Favourites')
-//const HeroPage = require('../../components/HeroPage');
 const { Book, Like } = require('../../db/models');
+//const ssr = require('../../middleware/ssr')
+
+
 
 router.get('/', async (req, res) => {
+  const {user} = res.locals;
+  if (user) {
   try {
     const booksWithMyLikes = await Book.findAll({
       order: [['id', 'ASC']],
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
         where: {
           user_id: res.locals.user.id,
         },
-        required: true, // Это гарантирует, что будут выбраны только те книги, у которых есть лайки от текущего пользователя
+        required: true, 
       },
     });
     console.log(booksWithMyLikes)
@@ -25,6 +27,8 @@ router.get('/', async (req, res) => {
   } catch ({ message }) {
     res.json({ message });
   }
+} else { res.send('<h1>Войдите, чтобы увидеть ваши любимые книги!</h1>')}
 });
+
 
 module.exports = router;
