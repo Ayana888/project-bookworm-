@@ -21,7 +21,26 @@ router.post("/", async (req, res) => {
       html,
     });
   } catch ({ message }) {
-    res.json(`POST: ${ message }`);
+    res.json(`POST: ${message}`);
+  }
+});
+
+router.put("/:bookId", async (req, res) => {
+  try {
+    const { bookId } = req.params;
+    const { name, author, img } = req.body;
+    const [result] = await Book.update(
+      { name, author, img },
+      { where: { id: bookId, user_id: res.locals.user.id } }
+    );
+    //update возвращает массив с числом, поэтому используем деструктуризацию массива
+    if (result > 0) {
+      res.json({ message: "success" });
+      return;
+    }
+    res.json({ message: "Не твоя вот ты и бесишься!" });
+  } catch ({ message }) {
+    res.json({ message });
   }
 });
 
