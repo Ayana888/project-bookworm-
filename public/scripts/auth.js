@@ -1,5 +1,6 @@
 const signInForm = document.querySelector("#sign-in");
 const signUpForm = document.querySelector("#sign-up");
+const ErrPassword = document.getElementsByName('rpassword')
 // console.log(signInForm, 22);
 
 if (signInForm) {
