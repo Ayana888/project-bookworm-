@@ -1,13 +1,11 @@
-
-const router = require('express').Router();
-const { Book } = require('../../db/models');
-const BookItem = require('../../components/BookItem');
-const multer = require('multer');
-
+const router = require("express").Router();
+const { Book } = require("../../db/models");
+const BookItem = require("../../components/BookItem");
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/img');
+    cb(null, "public/img");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -16,7 +14,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/', upload.single('img'), async (req, res) => {
+router.post("/", upload.single("img"), async (req, res) => {
   try {
     const { name, author } = req.body;
     const newFileUrl = `/img/${req.file.originalname}`;
@@ -32,12 +30,11 @@ router.post('/', upload.single('img'), async (req, res) => {
     });
     const html = res.renderComponent(BookItem, { book: currentBook });
     res.json({
-      message: 'success',
+      message: "success",
       html,
     });
   } catch ({ message }) {
     res.json(`POST: ${message}`);
-
   }
 });
 
@@ -54,12 +51,10 @@ router.put("/:bookId", async (req, res) => {
       res.json({ message: "success" });
       return;
     }
-    res.json({ message: "Не твоя вот ты и бесишься!" });
+    res.json({ message: "Эту книгу нельзя удалить!" });
   } catch ({ message }) {
     res.json({ message });
-
   }
 });
-
 
 module.exports = router;
