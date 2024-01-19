@@ -1,13 +1,13 @@
-const React = require("react")
+const React = require("react");
 
-function BookComment ({comment}){
-    return(
-<div className="comment_coc20">
-  <div className="card-body">
-    {comment.text}
-  </div>
-</div>
-    )
+function BookComment({ comment }) {
+  return (
+    <div className="comment_coc20">
+      <div className="card-body">
+        <div className="qwery">{comment.text}</div>
+      </div>
+    </div>
+  );
 }
 
-module.exports = BookComment
+module.exports = BookComment;
