@@ -11,6 +11,7 @@ function FormUpdatePage({ title, user, book }) {
               Name
             </label>
             <input
+              defaultValue={book.name}
               name="name"
               type="text"
               className="form-control"
@@ -23,6 +24,7 @@ function FormUpdatePage({ title, user, book }) {
               Author
             </label>
             <input
+              defaultValue={book.author}
               name="author"
               type="text"
               className="form-control"
@@ -34,6 +36,7 @@ function FormUpdatePage({ title, user, book }) {
               Image
             </label>
             <input
+              defaultValue={book.img}
               name="img"
               type="text"
               className="form-control"
