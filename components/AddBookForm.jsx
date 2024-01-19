@@ -1,11 +1,11 @@
 const React = require("react"); //
 const Layout = require("./Layout");
 
-function AddBookForm( {user} ) {
+function AddBookForm({ user }) {
   return (
-    <Layout user = {user}>
-      <div className="container">
-        <form className="add-book" style={{ color: "blue" }}>
+    <Layout user={user}>
+      <div className="containerAdd">
+        <form className="add-book">
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Name
@@ -35,7 +35,7 @@ function AddBookForm( {user} ) {
             </label>
             <input
               name="img"
-              type="text"
+              type="file"
               className="form-control"
               id="exampleInputPassword1"
             />

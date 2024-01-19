@@ -1,1 +1,0 @@
-const heroContainerLike = document.querySelector("");

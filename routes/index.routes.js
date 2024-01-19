@@ -10,7 +10,11 @@ const apiFavRouter = require('./api/api.favorites')
 
 const apiAuthRouter = require("./api/api.auth.routes");
 const apiBooksRouter = require("./api/api.books.routes");
+
+const apiRatingRouter = require('./api/api.routes.rating')
+
 const apiCommentRouter = require('./api/api.comments.routes')
+
 
 router.use("/", mainPageRouter);
 router.use("/auth", authRouter);
@@ -19,6 +23,7 @@ router.use("/favourites", favRouter);
 
 router.use("/api/auth", apiAuthRouter);
 router.use("/api/books", apiBooksRouter);
+router.use('/api/rating', apiRatingRouter);
 
 router.use("/api/books/:bookId", apiCommentRouter)
 router.use("/api/favorites", apiFavRouter)

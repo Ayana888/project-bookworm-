@@ -5,18 +5,14 @@ if (updateForm) {
     e.preventDefault();
     const { name, author, img } = e.target;
     const { id } = e.target.dataset;
+    const formData = new FormData();
+    formData.append('img', img.files[0]);
+    formData.append('name', name.value);
+    formData.append('author', author.value);
     // console.log(name.value, description.value, film.value, img.value); //все 4 инпута, значение достаем через .value
     const res = await fetch(`/api/books/${id}`, {
       method: "put",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      //body это тот объект, который хотим отправить на сервер//создание новой карточки
-      body: JSON.stringify({
-        name: name.value,
-        author: author.value,
-        img: img.value,
-      }),
+      body: formData,
     });
     const data = await res.json(); // парсим
     // console.log(data, 88888);

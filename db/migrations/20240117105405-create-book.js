@@ -21,10 +21,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      rating: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
