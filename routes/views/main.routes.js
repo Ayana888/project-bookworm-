@@ -3,15 +3,16 @@ const router = require("express").Router();
 const BookPage = require("../../components/BookPage");
 const MainPage = require("../../components/MainPage");
 
-const { Book, Comment } = require("../../db/models");
+const { Book, Comment, Rating } = require("../../db/models");
 
 const AddBookForm = require("../../components/AddBookForm");
 const BookItem = require("../../components/BookItem");
 const FormUpdatePage = require("../../components/FormUpdatePage");
 
+
 router.get("/", async (req, res) => {
 
-  const books = await Book.findAll();
+const books = await Book.findAll({include:[Rating]});
   const html = res.renderComponent(MainPage, { title: "Main page", books });
   res.send(html);
 });

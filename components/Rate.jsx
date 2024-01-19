@@ -1,13 +1,14 @@
 const React = require('react');
 
 function Rate({ user, book, children }) {
-  // let middlerating;
-  // if (book.Ratings.length === 0) {
-  //   middlerating = 0;
-  // } else {
-  //   middlerating =
-  //     route.Ratings.reduce((a, b) => a + b.rating, 0) / route.Ratings.length;
-  // }
+  let middlerating
+  if (!book.Rating||book.Rating.length === 0) {
+    middlerating = 0;
+  } else {
+    middlerating =
+      book.Rating.reduce((a, b) => a + b.rating, 0) / book.Rating.length;
+  }
+
   return (
     <form
       className='rating-form'
@@ -56,7 +57,7 @@ function Rate({ user, book, children }) {
           </div>
         </div>
     
-        <div className='rating_value'></div>
+        <div className="rating_value">{middlerating.toFixed(1)}</div>
         <div>{children}</div>
       </div>
     </form>

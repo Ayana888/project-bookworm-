@@ -33,20 +33,18 @@ if (signUpForm) {
   signUpForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const { Name, email,img, password, rpassword } = e.target;
+    const formData = new FormData();
+    formData.append('img', img.files[0]);
+    formData.append('name', Name.value);
+    formData.append('email', email.value);
+    formData.append('password', password.value)
+    formData.append('rpassword', rpassword.value)
+
     //console.log(Name.value,email.value,mobile.value, password.value, img.value);
     // console.log(name.value, password.value, img.value, 888);
     const res = await fetch("/api/auth/sign-up", {
       method: "post",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name: Name.value,
-        email: email.value,
-        password: password.value,
-        rpassword: rpassword.value,
-        img: img.value,
-      }),
+      body:formData
     });
     const data = await res.json();
 

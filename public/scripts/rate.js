@@ -62,6 +62,7 @@ divRatings.forEach((divRating) => {
 function addRating(divRating) {
   divRating.addEventListener('click', async (event) => {
     const bookID = divRating.dataset.id;
+    console.log(bookID);
     const ratingValue = event.target.value;
     try {
       const { rating } = event.target;
@@ -76,8 +77,8 @@ function addRating(divRating) {
       });
       const data = await res.json();
       console.log(data);
-      if (data.success === false) {
-        ratingForm.insertAdjacentHTML('afterbegin', data.trueHtml);
+      if (!data.ok) {
+        alert(data.message)
       }
     } catch (error) {
       console.log(error);

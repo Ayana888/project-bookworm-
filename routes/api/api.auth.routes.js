@@ -3,6 +3,18 @@ const { User } = require('../../db/models');
 const bcrypt = require('bcrypt');
 const generateTokens = require('../../utils/authUtils');
 const configJWT = require('../../middleware/configJWT');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,10 +64,12 @@ router.post('/sign-in', async (req, res) => {
   }
 });
 
-router.post('/sign-up', async (req, res) => {
+router.post('/sign-up', upload.single('img'), async (req, res) => {
   let user;
   try {
-    const { name, email, mobile, img, password, rpassword } = req.body;
+    const { name, email, img, password, rpassword } = req.body;
+    const newFileUrl = `/img/${req.file.originalname}`;
+
     //console.log(password, rpassword);
     console.log(name.trim() === '', password, img, 33);
     console.log(password, img, 333);
@@ -72,11 +86,14 @@ router.post('/sign-up', async (req, res) => {
     }
 
     if (
-      name.trim() === '' || name.trim() !== name ||
-      password.trim() === '' || password.trim() !== password ||
-      email.trim() === '' || email.trim() !== email ||
-      img.trim() === '' || img.trim() !== img ||
-      rpassword.trim() === '' || rpassword.trim() !== rpassword
+      name.trim() === '' ||
+      name.trim() !== name ||
+      password.trim() === '' ||
+      password.trim() !== password ||
+      email.trim() === '' ||
+      email.trim() !== email ||
+      rpassword.trim() === '' ||
+      rpassword.trim() !== rpassword
     ) {
       res.json({ message: 'Заполните все поля' });
       return;
@@ -90,7 +107,7 @@ router.post('/sign-up', async (req, res) => {
 
     const hash = await bcrypt.hash(password, 10);
     //в другом случае создает user
-    user = await User.create({ name, email, password: hash, img, mobile });
+    user = await User.create({ name, email, password: hash, img: newFileUrl });
     console.log(user.id, 77);
 
     // генерируем два токена
