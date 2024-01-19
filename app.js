@@ -3,12 +3,14 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
+
 const PORT = 4000;
 
 const indexRouter = require("./routes/index.routes");
 const ssr = require("./middleware/ssr");
 const { verifyAccessToken } = require("./middleware/verifyJWT");
-const getUser = require('./middleware/getUser')
+const getUser = require("./middleware/getUser");
 
 app.use(cookieParser()); // jwt должен быть ниже// раскрывает cookie на сервере
 app.use(express.urlencoded({ extended: "true" })); // //middleware должны быть над routes
