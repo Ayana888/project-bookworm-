@@ -2,7 +2,7 @@ const React = require("react");
 const Rate = require("./Rate");
 
 
-function BookItem({ book, user,children, rating }) {
+function BookItem({ book, user,children }) {
 
   return (
     <div className="boxmm" data-id={book.id}>
@@ -13,7 +13,7 @@ function BookItem({ book, user,children, rating }) {
           <p className="card-text">{book.author}</p>
 
 
-          <Rate user={user} book={book} children={children} rating={rating}/>
+          <Rate user={user} book={book} children={children} />
           <a href={`/books/${book.id}`} className="btn btn-primary">
             Подробнее
           </a>

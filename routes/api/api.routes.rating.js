@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Rating } = require('../../db/models');
+const {Rating} = require('../../db/models')
 
 router.post('/:bookId', async (req, res) => {
   console.log(123);
@@ -14,17 +14,10 @@ router.post('/:bookId', async (req, res) => {
         book_id: bookId,
       },
     });
-    if (oldrating) {
-      const currentRating = await Rating.findOne({
-        where: { user_id: res.locals.user.id },
-      });
-      console.log(currentRating);
-      return res.status(404).json({message:'вы уже оценили данную книгу'})
-    }
     const newRating = await Rating.create({
       user_id: res.locals.user.id,
       book_id: bookId,
-      rating: rating,
+      rating: rating
     });
     return res.json({ success: true });
   } catch (error) {
@@ -33,6 +26,8 @@ router.post('/:bookId', async (req, res) => {
 });
 
 module.exports = router;
+
+
 
 // console.log(oldrating);
 // if (oldrating) {

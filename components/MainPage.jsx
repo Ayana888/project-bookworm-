@@ -2,7 +2,7 @@ const React = require("react");
 const Layout = require("./Layout");
 const BookItem = require("./BookItem");
 
-function MainPage({ title, user, books,rating }) {
+function MainPage({ title, user, books }) {
   return (
     <Layout title={title} user={user}>
       <div>
@@ -11,7 +11,7 @@ function MainPage({ title, user, books,rating }) {
 
           
           {books.map((book) => (
-            <BookItem key={book.id} book={book} user = {user} rating={rating}/>
+            <BookItem key={book.id} book={book} user = {user} />
           ))}
 
 
