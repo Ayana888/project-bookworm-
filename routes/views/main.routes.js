@@ -9,11 +9,7 @@ const BookItem = require("../../components/BookItem");
 const FormUpdatePage = require("../../components/FormUpdatePage");
 
 router.get("/", async (req, res) => {
-  // const books = await Book.findAll();
-  const books = await Book.findAll({
-    order: [["id", "ASC"]],
-    include: Like,
-  });
+  const books = await Book.findAll();
   const html = res.renderComponent(MainPage, { title: "Main page", books });
   res.send(html);
 });
