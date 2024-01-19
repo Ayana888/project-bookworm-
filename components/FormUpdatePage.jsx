@@ -38,7 +38,7 @@ function FormUpdatePage({ title, user, book }) {
             <input
               defaultValue={book.img}
               name="img"
-              type="text"
+              type="file"
               className="form-control"
               id="exampleInputPassword1"
             />

@@ -32,7 +32,7 @@ if (signInForm) {
 if (signUpForm) {
   signUpForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const { Name, email, mobile, img, password, rpassword } = e.target;
+    const { Name, email,img, password, rpassword } = e.target;
     //console.log(Name.value,email.value,mobile.value, password.value, img.value);
     // console.log(name.value, password.value, img.value, 888);
     const res = await fetch("/api/auth/sign-up", {
@@ -43,7 +43,6 @@ if (signUpForm) {
       body: JSON.stringify({
         name: Name.value,
         email: email.value,
-        mobile: mobile.value,
         password: password.value,
         rpassword: rpassword.value,
         img: img.value,

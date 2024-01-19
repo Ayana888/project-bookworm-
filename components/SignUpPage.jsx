@@ -48,7 +48,7 @@ function SignUpPage() {
             <label htmlFor="img" className="form-label avatar">
               Image
             </label>
-            <input name="img" type="text" className="form-control" id="img" />
+            <input name="img" type="file" className="form-control" id="img" />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
