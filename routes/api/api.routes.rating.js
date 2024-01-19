@@ -1,11 +1,44 @@
 const router = require('express').Router();
-const bookPage = require('../../components/BookPage');
+const {Rating} = require('../../db/models')
 
-
-
-router.get('/', function (req, res) {
-  const html = res.renderComponent(bookPage, { title: 'Rate' });
-  res.send(html);
+router.post('/:bookId', async (req, res) => {
+  console.log(123);
+  const { bookId } = req.params;
+  const { rating } = req.body;
+  console.log(bookId, rating);
+  try {
+    // отправить запрос к бд
+    const oldrating = await Rating.findOne({
+      where: {
+        user_id: res.locals.user.id,
+        book_id: bookId,
+      },
+    });
+    const newRating = await Rating.create({
+      user_id: res.locals.user.id,
+      book_id: bookId,
+      rating: rating
+    });
+    return res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;
+
+
+
+// console.log(oldrating);
+// if (oldrating) {
+//   const oldRating = await Rating.findOne({
+//     where: { user_id: res.locals.user.id },
+//     raw: true,
+//   });
+//   console.log(oldRating.rating);
+//   const html = res.renderComponent(True, {
+//     message: 'Вы уже оценили данный маршрут',
+//     ratingRoute: `${oldRating.rating}`,
+//   });
+//   return res.status(404).json({ success: false, trueHtml: html });
+// }

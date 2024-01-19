@@ -71,6 +71,56 @@ body {
 
 .js-add-form {
   display: flex;
+
+    flex-direction: column;
+    align-items: center;
+  }
+  .ratingStar {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 40px;
+    line-height: 1;
+  }
+  
+  .rating_body {
+    position: relative;
+  }
+  .rating_body::before {
+    content: '★★★★★';
+    display: block;
+  }
+  .rating_active {
+    display: flex;
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  
+  .rating_active::before{
+    content: '★★★★★';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: gold;
+  }
+  .rating_items {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .rating_item {
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+=======
   flex-direction: column;
   align-items: center;
 }
@@ -156,6 +206,7 @@ body {
   95%,
   100% {
     background-position: -610px 0;
+
   }
   65%,
   85% {

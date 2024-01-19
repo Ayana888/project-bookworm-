@@ -1,7 +1,9 @@
 const React = require("react");
 const Rate = require("./Rate");
 
+
 function BookItem({ book, user }) {
+
   return (
     <div className="boxmm" data-id={book.id}>
       <div className="card" style={{ width: "18rem;" }}>
@@ -9,6 +11,7 @@ function BookItem({ book, user }) {
         <div className="card-body">
           <h5 className="card-title">{book.name}</h5>
           <p className="card-text">{book.author}</p>
+
 
           <a href={`/books/${book.id}`} className="btn btn-primary">
             Подробнее
@@ -33,6 +36,7 @@ function BookItem({ book, user }) {
                 </button>
               )}
 
+
               {user.id === book.user_id && (
                 <>
                   <button
@@ -49,6 +53,8 @@ function BookItem({ book, user }) {
                   >
                     Изменить
                   </a>
+        <Rate user={user} book={book} children={children}/>
+                  
                 </>
               )}
             </div>
@@ -57,6 +63,10 @@ function BookItem({ book, user }) {
       </div>
     </div>
   );
+
+        
+
 }
+
 
 module.exports = BookItem;

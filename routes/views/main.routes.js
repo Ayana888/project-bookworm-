@@ -1,3 +1,4 @@
+
 const router = require("express").Router();
 const BookPage = require("../../components/BookPage");
 const MainPage = require("../../components/MainPage");
@@ -45,17 +46,20 @@ router.get("/books/:bookId", async (req, res) => {
     const book = await Book.findOne({ where: { id: bookId } });
     const coments = await Comment.findAll({where: {book_id: bookId}})
     const html = res.renderComponent(BookPage, { title: "Book page", book, coments });
+
     res.send(html);
   } catch ({ message }) {
     res.json({ message });
   }
 });
+
 router.get("/AddBook", (req, res) => {
   const html = res.renderComponent(AddBookForm, { title: "Add Book Page", user: res.locals.user });
+
   res.send(html);
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, author, img } = req.body;
     const book = await Book.create({
@@ -68,9 +72,14 @@ router.post("/", async (req, res) => {
     const currentBook = await Book.findOne({
       where: { id: book.id },
     });
-    const html = res.renderComponent(BookItem, { book: currentBook });
+    const html = res.renderComponent(BookItem, {
+      book: currentBook,
+      user: res.locals.user,
+      route,
+      children,
+    });
     res.json({
-      message: "success",
+      message: 'success',
       html,
     });
   } catch ({ message }) {
@@ -79,6 +88,7 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:bookId", async (req, res) => {
+
   try {
     const { bookId } = req.params;
     const result = await Book.destroy({ where: {
@@ -101,7 +111,6 @@ router.delete("/:bookId", async (req, res) => {
 });
 
 
-
 router.post("/books/:bookId", async (req, res) => {
  
   try {
@@ -121,6 +130,7 @@ router.post("/books/:bookId", async (req, res) => {
     res.json(`POST: ${message}`);
   }
 });
+
 
 
 module.exports = router;
