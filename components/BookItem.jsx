@@ -2,9 +2,9 @@ const React = require('react');
 const Rate = require('./Rate');
 
 
-function BookItem({ book, user }) {
+function BookItem({ book, user, children }) {
   //console.log(book);
-  const [like] = book.Likes.filter((el)=>el.user_id === user.id);
+  // const [like] = book.Likes.filter((el)=>el.user_id === user.id);
 
   return (
     <div style={{ display: "flex", paddingRight: "90px" }}>
@@ -16,7 +16,7 @@ function BookItem({ book, user }) {
         
  <a href={`/books/${book.id}`} className="btn btn-primary">Подробнее</a>
 
-        {like ? (
+        {/* {like ? (
           <button data-id={book.id} className="btn btn-success dfavorite" type="button">
             Удалить из избранного
           </button>
@@ -25,16 +25,17 @@ function BookItem({ book, user }) {
             В избранное
           </button>
         )}
-         
+          */}
     <button data-id={book.id}  className="btn btn-danger delete" type="button">Удалить</button>
         <a href={`/heroes/update-form/${book.id}`} className="btn btn-warning update" type="button">
              Изменить
         </a> 
+        <Rate user={user} book={book} children={children}/>
 
         </div>
       </div>
     </div>
   );
-
+        }
 
 module.exports = BookItem;

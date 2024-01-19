@@ -1,31 +1,32 @@
-const router = require("express").Router();
-const BookPage = require("../../components/BookPage");
-const MainPage = require("../../components/MainPage");
-const {Book} = require('../../db/models')
-const AddBookForm = require("../../components/AddBookForm");
-const BookItem = require("../../components/BookItem");
+const router = require('express').Router();
+const BookPage = require('../../components/BookPage');
+const MainPage = require('../../components/MainPage');
+const { Book } = require('../../db/models');
+const AddBookForm = require('../../components/AddBookForm');
+const BookItem = require('../../components/BookItem');
+const { route } = require('../api/api.routes.rating');
 
-router.get("/", async (req, res) => {
-  const book = await Book.findAll()
-  const html = res.renderComponent(MainPage, { title: "Main page",book });
+router.get('/', async (req, res) => {
+  const books = await Book.findAll();
+  const html = res.renderComponent(MainPage, { title: 'Main page', books });
   res.send(html);
 });
-router.get("/books/:bookId", async (req, res) => {
+router.get('/books/:bookId', async (req, res) => {
   try {
     const { bookId } = req.params;
     const book = await Book.findOne({ where: { id: bookId } });
-    const html = res.renderComponent(BookPage, { title: "Book page", book });
+    const html = res.renderComponent(BookPage, { title: 'Book page', book });
     res.send(html);
   } catch ({ message }) {
     res.json({ message });
   }
 });
-router.get("/AddBook", (req, res) => {
-  const html = res.renderComponent(AddBookForm, { title: "Add Book Page" });
+router.get('/AddBook', (req, res) => {
+  const html = res.renderComponent(AddBookForm, { title: 'Add Book Page' });
   res.send(html);
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, author, img } = req.body;
     const book = await Book.create({
@@ -38,16 +39,20 @@ router.post("/", async (req, res) => {
     const currentBook = await Book.findOne({
       where: { id: book.id },
     });
-    const html = res.renderComponent(BookItem, { book: currentBook });
+    const html = res.renderComponent(BookItem, {
+      book: currentBook,
+      user: res.locals.user,
+      route,
+      children,
+    });
     res.json({
-      message: "success",
+      message: 'success',
       html,
     });
   } catch ({ message }) {
-    res.json(`POST: ${ message }`);
+    res.json(`POST: ${message}`);
   }
 });
-
 
 router.delete('/:bookId', async (req, res) => {
   try {
@@ -62,7 +67,5 @@ router.delete('/:bookId', async (req, res) => {
     res.json({ message });
   }
 });
-
-
 
 module.exports = router;

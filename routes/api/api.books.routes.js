@@ -1,14 +1,27 @@
-const router = require("express").Router();
-const { Book } = require("../../db/models");
-const BookItem = require("../../components/BookItem");
+const router = require('express').Router();
+const { Book } = require('../../db/models');
+const BookItem = require('../../components/BookItem');
+const multer = require('multer');
 
-router.post("/", async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+router.post('/', upload.single('img'), async (req, res) => {
   try {
-    const { name, author, img } = req.body;
+    const { name, author } = req.body;
+    const newFileUrl = `/img/${req.file.originalname}`;
     const book = await Book.create({
       name,
       author,
-      img,
+      img: newFileUrl,
       rating: 1,
       user_id: res.locals.user.id,
     });
@@ -17,11 +30,11 @@ router.post("/", async (req, res) => {
     });
     const html = res.renderComponent(BookItem, { book: currentBook });
     res.json({
-      message: "success",
+      message: 'success',
       html,
     });
   } catch ({ message }) {
-    res.json(`POST: ${ message }`);
+    res.json(`POST: ${message}`);
   }
 });
 
