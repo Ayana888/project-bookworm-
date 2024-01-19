@@ -11,7 +11,7 @@ function MainPage({ title, user, books }) {
 
           
           {books.map((book) => (
-            <BookItem key={book.id} book={book} user = {user}/>
+            <BookItem key={book.id} book={book} user = {user} />
           ))}
 
 

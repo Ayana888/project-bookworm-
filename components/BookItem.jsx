@@ -10,6 +10,7 @@ function BookItem({ book, user, children }) {
           <h5 className="card-title">{book.name}</h5>
           <p className="card-text">{book.author}</p>
 
+
           <Rate user={user} book={book} children={children} />
           <a href={`/books/${book.id}`} className="btn btn-primary">
             Подробнее

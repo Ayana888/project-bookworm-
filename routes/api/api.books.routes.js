@@ -22,7 +22,6 @@ router.post("/", upload.single("img"), async (req, res) => {
       name,
       author,
       img: newFileUrl,
-      rating: 1,
       user_id: res.locals.user.id,
     });
     const currentBook = await Book.findOne({
@@ -38,12 +37,13 @@ router.post("/", upload.single("img"), async (req, res) => {
   }
 });
 
-router.put("/:bookId", async (req, res) => {
+router.put("/:bookId",upload.single('img'), async (req, res) => {
   try {
     const { bookId } = req.params;
-    const { name, author, img } = req.body;
+    const { name, author } = req.body;
+    const newFileUrl = `/img/${req.file.originalname}`;
     const [result] = await Book.update(
-      { name, author, img },
+      { name, author, img:newFileUrl },
       { where: { id: bookId, user_id: res.locals.user.id } }
     );
     //update возвращает массив с числом, поэтому используем деструктуризацию массива
