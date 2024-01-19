@@ -1,16 +1,17 @@
-const React = require("react"); //
+const React = require("react");
 const Layout = require("./Layout");
 
-function AddBookForm({ user }) {
+function FormUpdatePage({ title, user, book }) {
   return (
-    <Layout user={user}>
-      <div className="containerAdd">
-        <form className="add-book">
+    <Layout title={title} user={user}>
+      <div className="container">
+        <form data-id={book.id} id="update-book">
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Name
             </label>
             <input
+              defaultValue={book.name}
               name="name"
               type="text"
               className="form-control"
@@ -23,6 +24,7 @@ function AddBookForm({ user }) {
               Author
             </label>
             <input
+              defaultValue={book.author}
               name="author"
               type="text"
               className="form-control"
@@ -34,8 +36,9 @@ function AddBookForm({ user }) {
               Image
             </label>
             <input
+              defaultValue={book.img}
               name="img"
-              type="file"
+              type="text"
               className="form-control"
               id="exampleInputPassword1"
             />
@@ -49,4 +52,4 @@ function AddBookForm({ user }) {
   );
 }
 
-module.exports = AddBookForm;
+module.exports = FormUpdatePage;

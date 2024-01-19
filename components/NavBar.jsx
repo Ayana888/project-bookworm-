@@ -30,13 +30,13 @@ function NavBar({ user }) {
                 <a className="nav-link" href="/favourites">
                   Favorites
                 </a>
-                <div className="nav__profile">
-                  <p>Hello, {user.name}</p>
-                  <img className="nav__avatar" src={user.img} alt="" />
-                </div>
                 <a className="nav-link" href="/api/auth/logout">
                   Logout
                 </a>
+                <div className="nav__profile">
+                  <p>Hello, {user.name} !</p>
+                  <img className="nav__avatar" src={user.img} alt="" />
+                </div>
               </>
             ) : (
               <>
@@ -46,6 +46,7 @@ function NavBar({ user }) {
                 <a className="nav-link" href="/auth/sign-up">
                   Sign up
                 </a>
+                {/* <a className="nav-link" style={{ color: 'black' }}>Hello, Guest!✋</a> */}
               </>
             )}
           </div>
