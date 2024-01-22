@@ -6,7 +6,6 @@ if (addComment) {
     e.preventDefault();
     const { id } = box.dataset
     const { text } = e.target;
-    console.log(text.value);
     const res = await fetch("/api/books/:bookId", {
       method: "post",
       headers: {
@@ -19,15 +18,13 @@ if (addComment) {
       }),
     });
     const data = await res.json();
-    console.log(data);
     if (data.message === "success") {
-      console.log(data);
-      const bookComment = document.querySelector(".comment_coc20");
+      const bookComment = document.querySelector('.commContainer'); //ЕСЛИ НЕТ ЕЩЕ НИ ОДНОГО КОММЕНТА - ТО НЕТ ТАКОГО СЕЛЕКТОРА, КАК У ДИВОВ ДЛЯ КОММЕНТОВ
+      //  ПЕРЕИМЕНОВАЛА ОБЩИЙ КОНТЕЙНЕР ДЛЯ КОММЕНТОВ И ВСЕ ЗАРАБОТАЛО
       bookComment.insertAdjacentHTML('afterbegin', data.html)
-
       e.target.reset(); // очитска форма после добавления
       // window.location.assign('/')
-    } else {
+    } else {  alert(data.message);
     }
   });
 }

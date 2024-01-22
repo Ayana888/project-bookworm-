@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+//const multer = require('multer');
 
 const PORT = 4000;
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(ssr); //без вызова, так как express сам вызовет ф-ю и сам вызовет ф-ю next() lдля выполнения следующей middleware
 app.use(verifyAccessToken); // ??????
 app.use(getUser);
+//app.use(multer)
 
 app.use("/", indexRouter);
 

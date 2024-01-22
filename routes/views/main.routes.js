@@ -2,15 +2,25 @@ const router = require("express").Router();
 const BookPage = require("../../components/BookPage");
 const MainPage = require("../../components/MainPage");
 
-const { Book, Comment, Like } = require("../../db/models");
+
+const { Book, Comment, Like, Rating } = require("../../db/models");
+
 
 const AddBookForm = require("../../components/AddBookForm");
 const BookItem = require("../../components/BookItem");
 const FormUpdatePage = require("../../components/FormUpdatePage");
 
 
-router.get("/", async (req, res) => {
-  const books = await Book.findAll();
+router.get("/", async (req, res) => { 
+  // const books = await Book.findAll()
+  const books = await Book.findAll({
+    order: [['id', 'ASC']],
+    include: [
+      { model: Like },
+      // { model: Rating },
+    ],
+  });
+
 
   const html = res.renderComponent(MainPage, { title: "Main page", books });
   res.send(html);
@@ -94,16 +104,30 @@ router.post("/", async (req, res) => {
 router.delete("/:bookId", async (req, res) => {
   try {
     const { bookId } = req.params;
-    const result = await Book.destroy({
-      where: {
-        id: bookId,
-        user_id: res.locals.user.id,
-      },
-    });
-    // await Like.destroy({ where: {
-    //   book_id: bookId,
-    //   user_id: res.locals.user.id,
-    // }});
+
+    await Comment.destroy({ where: { book_id: bookId } });
+    await Rating.destroy({ where: { book_id: bookId } });
+    await Like.destroy({ where: { book_id: bookId } });
+    const result = await Book.destroy({ where: {
+    id: bookId,
+    user_id: res.locals.user.id,
+  }});
+  // await Like.destroy({ where: {
+  //   book_id: bookId,
+  //   user_id: res.locals.user.id,
+  // }});
+
+//     const result = await Book.destroy({
+//       where: {
+//         id: bookId,
+//         user_id: res.locals.user.id,
+//       },
+//     });
+//     // await Like.destroy({ where: {
+//     //   book_id: bookId,
+//     //   user_id: res.locals.user.id,
+//     // }});
+
     if (result > 0) {
       res.json({ message: "success" });
       return;

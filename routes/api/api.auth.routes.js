@@ -102,7 +102,7 @@ router.post('/sign-up', upload.single('img'), async (req, res) => {
     if (rpassword !== password) {
       res.json({ message: 'Пароли не совпадают!' });
       return;
-      rs;
+      
     } //нельзя отправить два jsona, надо писать на странице
 
     const hash = await bcrypt.hash(password, 10);

@@ -25,7 +25,7 @@ function BookPage({ title, book, user, coments }) {
             </form>
           )}
 
-          <div className="comment-coc">
+          <div className="commContainer">
             {coments.map((comment) => (
               <BookComment comment={comment} key={comment.id} />
             ))}

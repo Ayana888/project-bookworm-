@@ -1,5 +1,6 @@
 const React = require('react');
 
+
  function Rate({ user, book, children }) {
     let middlerating;
     // if (route.Ratings.length === 0) {
@@ -54,6 +55,7 @@ const React = require('react');
               />
               <label title="Оценка «5»"></label>
             </div>
+
           </div>
           {/* <div className="rating_value"></div> */}
           <div>{children}</div>

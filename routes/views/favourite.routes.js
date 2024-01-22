@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         required: true, 
       },
     });
-    console.log(booksWithMyLikes)
+    //console.log(booksWithMyLikes)
    // const [like] = book.Likes.filter((el)=>el.user_id === user.id);// console.log(books, '111111111111');
     const html = res.renderComponent(Favourites, { title: ' My books page', booksWithMyLikes});
    
