@@ -2,8 +2,11 @@ const React = require("react");
 const Rate = require("./Rate");
 
 
-function BookItem({ book, user,children }) {
+function BookItem({ book, user, children }) {
+console.log(book);
+const likes = book.Likes.filter((obj) => obj.user_id === user?.id)
 
+console.log(likes);
   return (
     <div className="boxmm" data-id={book.id}>
       <div className="card" style={{ width: "18rem;" }}>
@@ -19,7 +22,7 @@ function BookItem({ book, user,children }) {
           </a>
           {user && (
             <div>
-              {book.Likes ? (
+              {likes.length ? (
                 <button
                   data-id={book.id}
                   className="btn btn-success dfavorite"

@@ -6,8 +6,10 @@ function Rate({ user, book, children }) {
   //   middlerating = 0;
   // } else {
   //   middlerating =
-  //     route.Ratings.reduce((a, b) => a + b.rating, 0) / route.Ratings.length;
-  // }
+  //     book.Ratings.reduce((a, b) => a + b.rating, 0) / book.Ratings.length;
+  // };
+  //console.log(middlerating, 'Это рейтинг');
+  //А где дальше используется то?
   return (
     <form
       className='rating-form'

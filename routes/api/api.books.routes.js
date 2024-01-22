@@ -1,13 +1,11 @@
-
-const router = require('express').Router();
-const { Book } = require('../../db/models');
-const BookItem = require('../../components/BookItem');
-const multer = require('multer');
-
+const router = require("express").Router();
+const { Book } = require("../../db/models");
+const BookItem = require("../../components/BookItem");
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/img');
+    cb(null, "public/img");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -16,7 +14,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/', upload.single('img'), async (req, res) => {
+router.post("/", upload.single("img"), async (req, res) => {
+  // console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
   try {
     const { name, author } = req.body;
     const newFileUrl = `/img/${req.file.originalname}`;
@@ -24,31 +23,45 @@ router.post('/', upload.single('img'), async (req, res) => {
       name,
       author,
       img: newFileUrl,
-      rating: 1,
       user_id: res.locals.user.id,
     });
-    const currentBook = await Book.findOne({
+    //console.log(book);
+    // const currentBook = await Book.findOne({
+    //   where: { id: book.id },
+    //   include: Like,
+    // });
+    const currentBook = await Book.findAll({
       where: { id: book.id },
+      // include: Like
     });
-    const html = res.renderComponent(BookItem, { book: currentBook });
+    currentBook.Likes = []             
+    //  ПОЧЕМУ УДАЛОСЬ ЗАПУСТИТЬ ТОЛЬКО НАПИСАВ МАССИВ ЛАЙКОВ ВРУЧНУЮ? ПОЧЕМУ ОНИ НЕ ДОСТАВАЛИСЬ ИЗ ТАБЛИЦЫ?
+    console.log(currentBook);
+    const html = res.renderComponent(BookItem, {
+      book: currentBook,
+      user: res.locals.user.id,
+    });
+    console.log(html);
     res.json({
-      message: 'success',
+      message: "success",
       html,
     });
   } catch ({ message }) {
     res.json(`POST: ${message}`);
-
   }
 });
 
-router.put("/:bookId", async (req, res) => {
+router.put("/:bookId", upload.single("img"), async (req, res) => {
   try {
     const { bookId } = req.params;
-    const { name, author, img } = req.body;
+    const { name, author } = req.body;
+    const newFileUrl = `/img/${req.file.originalname}`;
     const [result] = await Book.update(
-      { name, author, img },
+      { name, author, img: newFileUrl, user_id: res.locals.user.id },
+      //походу меняет запись, только если все поля изменены (почему?), а чтоб менялась картинка надо загрузчик
       { where: { id: bookId, user_id: res.locals.user.id } }
     );
+    console.log(result);
     //update возвращает массив с числом, поэтому используем деструктуризацию массива
     if (result > 0) {
       res.json({ message: "success" });
@@ -57,9 +70,7 @@ router.put("/:bookId", async (req, res) => {
     res.json({ message: "Не твоя вот ты и бесишься!" });
   } catch ({ message }) {
     res.json({ message });
-
   }
 });
-
 
 module.exports = router;
