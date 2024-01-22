@@ -18,7 +18,7 @@ if (updateForm) {
     // console.log(name.value, description.value, film.value, img.value); //все 4 инпута, значение достаем через .value
     const res = await fetch(`/api/books/${id}`, {
       method: "put",
-      body: formData,
+      body:formData,
     });
     // console.log(formData);
     const data = await res.json(); // парсим

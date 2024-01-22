@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/", upload.single("img"), async (req, res) => {
-  // console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+
   try {
     const { name, author } = req.body;
     const newFileUrl = `/img/${req.file.originalname}`;
@@ -51,14 +51,18 @@ router.post("/", upload.single("img"), async (req, res) => {
   }
 });
 
+
 router.put("/:bookId", upload.single("img"), async (req, res) => {
+
   try {
     const { bookId } = req.params;
     const { name, author } = req.body;
     const newFileUrl = `/img/${req.file.originalname}`;
     const [result] = await Book.update(
+
       { name, author, img: newFileUrl, user_id: res.locals.user.id },
       //походу меняет запись, только если все поля изменены (почему?), а чтоб менялась картинка надо загрузчик
+
       { where: { id: bookId, user_id: res.locals.user.id } }
     );
     console.log(result);
@@ -67,7 +71,7 @@ router.put("/:bookId", upload.single("img"), async (req, res) => {
       res.json({ message: "success" });
       return;
     }
-    res.json({ message: "Не твоя вот ты и бесишься!" });
+    res.json({ message: "Эту книгу нельзя удалить!" });
   } catch ({ message }) {
     res.json({ message });
   }

@@ -2,11 +2,12 @@ const React = require("react");
 const Rate = require("./Rate");
 
 
+
 function BookItem({ book, user, children }) {
 console.log(book);
 const likes = book.Likes.filter((obj) => obj.user_id === user?.id)
 
-console.log(likes);
+
   return (
     <div className="boxmm" data-id={book.id}>
       <div className="card" style={{ width: "18rem;" }}>
@@ -16,7 +17,7 @@ console.log(likes);
           <p className="card-text">{book.author}</p>
 
 
-          <Rate user={user} book={book} children={children}/>
+          <Rate user={user} book={book} children={children} />
           <a href={`/books/${book.id}`} className="btn btn-primary">
             Подробнее
           </a>
@@ -38,9 +39,7 @@ console.log(likes);
                 >
                   В избранное ❤️
                 </button>
-
               )}
-
 
               {user.id === book.user_id && (
                 <>
@@ -58,7 +57,6 @@ console.log(likes);
                   >
                     Изменить
                   </a>
-                  
                 </>
               )}
             </div>
@@ -67,10 +65,6 @@ console.log(likes);
       </div>
     </div>
   );
-
-        
-
 }
-
 
 module.exports = BookItem;
